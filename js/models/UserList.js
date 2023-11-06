@@ -84,7 +84,8 @@ export default class UserList {
 
     async deleteUser(obj) {
         await Axios.deleteUser(obj);
-        return this.renderList();
+        this.currentList = this.currentList.filter(user => user.id !== obj.id)
+        return this.renderList(this.currentList);
     }
 
     renderNoDataList(parentElm) {
@@ -140,6 +141,14 @@ export default class UserList {
         let appendData = ``;
         for (let i = 0; i < users.length; i++) {
             if (!users[i]) continue;
+            let memo = '';
+            switch (users[i].type) {
+                case "student": memo = `Average Score is ${Math.round(users[i].averageScore)}`; break;
+                case "staff": memo = `This Month Salary is ${new Intl.NumberFormat().format(users[i].paycheck)} VND`; break;
+                case "customer": memo = `Company ${users[i].companyName} rated ${users[i].reviewRating}<br>
+                                        for the ${new Intl.NumberFormat().format(users[i].orderPrice)} VND order`;break;
+                default: memo = '';
+            }
             appendData +=
                 `
                 <tr>
@@ -148,6 +157,7 @@ export default class UserList {
                     <td>${users[i].fullName}</td>
                     <td>${users[i].address}</td>
                     <td>${users[i].email}</td>
+                    <td>${memo}</td>
                     <td>
                         <button id='edit-btn-${users[i].id}' class='btn-orange' data-toggle='modal'
                                 data-target='#exampleModal'
@@ -203,11 +213,13 @@ export class UserModal {
         this.typeInputElm.addEventListener("change", () => this.renderExtraQuestions());
         this.submitBtnElm.addEventListener("click", () => {
             let obj = this.getRegisteredValues();
+            console.log(obj)
             if (!obj.id) {
                 this.createUser(obj).then(() =>
                     document.getElementsByClassName("close")[0].click());
             } else {
-                this.updateUser(obj).then(() => document.getElementsByClassName("close")[0].click());
+                this.updateUser(obj).then(() =>
+                    document.getElementsByClassName("close")[0].click());
             }
         })
     }
@@ -225,21 +237,37 @@ export class UserModal {
         return this.userListInstance.renderList();
     }
     getRegisteredValues() {
-        return {
-            id: getElm("idReadOnly").value,
+        let input = {
             fullName: getElm("fullNameInput").value,
             address: getElm("addressInput").value,
             email: getElm("emailInput").value,
             type: getElm("typeInput").value,
-            mathScore: getElm("mathScoreInput").value,
-            physicsScore: getElm("physicsScoreInput").value,
-            chemicalScore: getElm("chemicalScoreInput").value,
-            salary: getElm("salaryInput").value,
-            workdayCount: getElm("workdayCountInput").value,
+            mathScore: getElm("mathScoreInput").value * 1,
+            physicsScore: getElm("physicsScoreInput").value * 1,
+            chemicalScore: getElm("chemicalScoreInput").value * 1,
+            salary: getElm("salaryInput").value * 1,
+            workdayCount: getElm("workdayCountInput").value * 1,
             companyName: getElm("companyNameInput").value,
-            orderPrice: getElm("orderPriceInput").value,
-            reviewRating: getElm("reviewRatingInput").value
+            orderPrice: getElm("orderPriceInput").value * 1,
+            reviewRating: getElm("reviewRatingInput").value * 1
         }
+
+        if (input.type !== "student") {
+            input.mathScore = null;
+            input.physicsScore = null;
+            input.chemicalScore = null;
+        }
+        if (input.type !== "staff") {
+            input.salary = null;
+            input.workdayCount = null;
+        }
+        if (input.type !== "customer") {
+            input.companyName = null;
+            input.orderPrice = null;
+            input.reviewRating = null;
+        }
+
+        return this.userListInstance.checkType(input);
     }
 
     setDefaultValues() {
@@ -264,6 +292,22 @@ export class UserModal {
 
         if (_isEdit) {
             let obj = await this.getUser(_obj);
+
+            if (obj.type !== "student") {
+                obj.mathScore = null;
+                obj.physicsScore = null;
+                obj.chemicalScore = null;
+            }
+            if (obj.type !== "staff") {
+                obj.salary = null;
+                obj.workdayCount = null;
+            }
+            if (obj.type !== "customer") {
+                obj.companyName = null;
+                obj.orderPrice = null;
+                obj.reviewRating = null;
+            }
+
             setElm("idReadOnly", obj.id);
             setElm("fullNameInput", obj.fullName);
             setElm("addressInput", obj.address);
