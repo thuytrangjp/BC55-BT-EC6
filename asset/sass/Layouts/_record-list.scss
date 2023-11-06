@@ -1,0 +1,92 @@
+@import "./../Helpers/variables";
+@import "../Components/scroll-bar";
+
+@mixin getTableBodyHeight() {
+  max-height: 400px;
+}
+
+@mixin setTableColumnWidth($width: 20vw, $align: center) {
+  min-width: $width;
+  max-width: $width;
+  text-align: $align;
+}
+
+@mixin setTableCellFormat(
+      $bg-color: $white,
+      $py: 20px,
+      $px: 20px
+  ) {
+      word-wrap: break-word;
+      border-collapse: collapse;
+      border: 1px solid $gray-600;
+
+      background-color: $bg-color;
+      padding: $py $px;
+
+      @if $bg-color != $white {
+        color: $white;
+      }
+}
+
+%record-list {
+  @extend %scroll-bar;
+
+  table{
+    border-collapse: collapse;
+    background: $white;
+    width: 100%;
+  }
+
+  .record-list__table {
+    border-radius: $border-radius;
+    overflow-x: auto;
+    box-shadow:
+      2px 2px $gray-800,
+      -2px 2px $gray-800,
+      2px -2px $gray-800,
+      -2px -2px $gray-800;
+  }
+
+  .record-list__header-freeze {
+    position: sticky;
+    display: block;
+    top: -1px;
+    z-index: 1;
+
+    th {
+      @include setTableCellFormat($gray-800, 10px);
+      @include setTableColumnWidth();
+      border-bottom: 1px solid $gray-800;
+      border-top: none;
+
+      &:first-child {
+        @include setTableColumnWidth(75px);
+        border-left: none;
+      }
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+
+  .record-list__body-scrollable {
+    @include getTableBodyHeight();
+    display: block;
+    overflow-y: scroll;
+
+    td {
+      @include setTableCellFormat();
+      @include setTableColumnWidth();
+
+      &:first-child {
+        @include setTableColumnWidth(75px);
+        border-left: none;
+      }
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+}

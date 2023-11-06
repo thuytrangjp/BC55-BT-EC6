@@ -1,0 +1,30 @@
+@import "./../Helpers/variables";
+
+%scroll-bar {
+  ::-webkit-scrollbar {
+    /* Width */
+    width: 0;
+    height: 10px;
+    background: $gray-500;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
+  ::-webkit-scrollbar-track {
+    /* Track */
+    background: $gray-500;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
+  ::-webkit-scrollbar-thumb {
+    /* Handle */
+    background: $gray-700;
+    border-bottom-left-radius: $border-radius - 1px;
+    border-bottom-right-radius: $border-radius - 1px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    /* Handle on hover */
+    background: $gray-600;
+    border-bottom-left-radius: $border-radius - 1px;
+    border-bottom-right-radius: $border-radius - 1px;
+  }
+}

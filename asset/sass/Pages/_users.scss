@@ -1,0 +1,7 @@
+@import "./../Layouts/record-list";
+
+#user-list {
+  .record-list {
+    @extend %record-list
+  }
+}

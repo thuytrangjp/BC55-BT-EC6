@@ -1,0 +1,29 @@
+@import "../Helpers/variables";
+
+.action-control {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 10px;
+
+  background-color: $white-transparent;
+  border-radius: $border-radius;
+  margin-bottom: 20px;
+  padding: 20px;
+
+  .upper, .middle, .lower {
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .action-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+}

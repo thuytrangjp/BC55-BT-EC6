@@ -1,0 +1,59 @@
+@import "./../Helpers/variables";
+
+header {
+  background-color: $white;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.content {
+  width: $content-width;
+  background-color: $white-transparent;
+  margin: 40px auto;
+  padding: 40px;
+  border-radius: $border-radius;
+}
+
+.bahnschrift {
+  font-family: Bahnschrift, 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 28px;
+  line-height: 28px;
+  background: linear-gradient(to right, $bg-color-right, $bg-color-left);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h2 {
+  font-size: 24px;
+  line-height: 24px;
+}
+
+h3 {
+  font-size: 20px;
+  line-height: 20px;
+}
+
+h4 {
+  font-size: 16px;
+  line-height: 18px;
+}
+
+h5 {
+  font-size: 14px;
+  line-height: 16px;
+}
+
+h6 {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}

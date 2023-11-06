@@ -1,0 +1,10 @@
+@import "./../Helpers/variables";
+
+button {
+  padding: 8px 25px;
+  border: none;
+  border-radius: $border-radius;
+  transition: all 0.25s;
+  font-weight: 600;
+  cursor: pointer;
+}

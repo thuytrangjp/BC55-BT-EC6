@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+    <link rel="stylesheet" href="./../asset/css/main.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title bahnschrift">CyberLab Research</h1>
+        </header>
+
+        <!-- Content -->
+        <div class="content" id="user-list">
+            <section class="action-control">
+                <div class="upper">
+                    <div class="page-title">
+                        <h2 class="bahnschrift">User List</h2>
+                    </div>
+                    <div class="action-button">
+                        <button id="search-btn" class="btn-blue">Search</button>
+                        <button id="sort-btn" class="btn-white">Sort A to Z</button>
+                        <button id="add-btn" class="btn-green" data-toggle="modal"
+                                data-target="#exampleModal">Add</button>
+                    </div>
+                </div>
+                <div class="lower">
+                    <div class="search container p-0">
+                        <div class="row">
+                            <!-- <div class="form-group col"> -->
+                            <!--     <label for="filterById">ID</label> -->
+                            <!--     <input class="form-control" type="text" name="id" id="filterById" -->
+                            <!--            placeholder="Please input to search" -->
+                            <!--     > -->
+                            <!-- </div> -->
+                            <div class="form-group col">
+                                <label for="filterByType">Type</label>
+                                <select class="form-control" name="type" id="filterByType">
+                                    <option value="">Please select to search</option>
+                                    <option value="student">Student</option>
+                                    <option value="staff">Staff</option>
+                                    <option value="customer">Customer</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="record-list">
+                <div class="record-list__table">
+                    <table>
+                        <thead class="record-list__header-freeze">
+                            <tr>
+                                <th>ID</th>
+                                <th>Type</th>
+                                <th>Full Name</th>
+                                <th>Address</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="record-list" class="record-list__body-scrollable">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">User Info</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <section class="commonQ">
+                            <div class="row">
+                                <div class="form-group col hidden">
+                                    <label for="idReadOnly">ID</label>
+                                    <input class="form-control" type="text" name="fullName" id="idReadOnly" readonly>
+                                </div>
+                                <div class="form-group col">
+                                    <label for="fullNameInput">Full Name</label>
+                                    <input class="form-control" type="text" name="fullName" id="fullNameInput"
+                                           placeholder="Please input the full name">
+                                </div>
+                                <div class="form-group col">
+                                    <label for="emailInput">Email</label>
+                                    <input class="form-control" type="text" name="email" id="emailInput"
+                                           placeholder="Please input the email">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="addressInput">Address</label>
+                                    <input class="form-control" type="text" name="address" id="addressInput"
+                                           placeholder="Please input the address">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="typeInput">Type</label>
+                                    <select class="form-control" name="type" id="typeInput">
+                                        <option value="">Please select one option</option>
+                                        <option value="student">Student</option>
+                                        <option value="staff">Staff</option>
+                                        <option value="customer">Customer</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </section>
+                        <section id="studentQ" class="hidden">
+                            <hr>
+                            <div>
+                                <h5 class="text-center pb-3"><strong>Student Question</strong></h5>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="mathScoreInput">Math</label>
+                                    <input class="form-control" type="text" name="mathScore" id="mathScoreInput"
+                                           placeholder="Only number">
+                                </div>
+                                <div class="form-group col">
+                                    <label for="physicsScoreInput">Physics</label>
+                                    <input class="form-control" type="text" name="physicsScore" id="physicsScoreInput"
+                                           placeholder="Only number">
+                                </div>
+                                <div class="form-group col">
+                                    <label for="chemicalScoreInput">Chemical</label>
+                                    <input class="form-control" type="text" name="chemicalScore" id="chemicalScoreInput"
+                                           placeholder="Only number">
+                                </div>
+                            </div>
+                        </section>
+                        <section id="staffQ" class="hidden">
+                            <hr>
+                            <div>
+                                <h5 class="text-center pb-3"><strong>Staff Question</strong></h5>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="salaryInput">Salary</label>
+                                    <input class="form-control" type="text" name="salary" id="salaryInput"
+                                           placeholder="Only number">
+                                </div>
+                                <div class="form-group col">
+                                    <label for="workdayCountInput">This Month Workday</label>
+                                    <input class="form-control" type="text" name="workdayCount" id="workdayCountInput"
+                                           placeholder="Only number">
+                                </div>
+                            </div>
+                        </section>
+                        <section id="customerQ" class="hidden">
+                            <hr>
+                            <div>
+                                <h5 class="text-center pb-3"><strong>Customer Question</strong></h5>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="companyNameInput">Company Name</label>
+                                    <input class="form-control" type="text" name="companyName" id="companyNameInput"
+                                           placeholder="Please input companyName name">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col">
+                                    <label for="orderPriceInput">Last Order Price</label>
+                                    <input class="form-control" type="text" name="orderPrice" id="orderPriceInput"
+                                           placeholder="Only number">
+                                </div>
+                                <div class="form-group col">
+                                    <label for="reviewRatingInput">Review Rating</label>
+                                    <input class="form-control" type="text" name="reviewRating" id="reviewRatingInput"
+                                           placeholder="Only number from 1 ~ 5">
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="submit-btn" type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="./../js/main.js"></script>
+</body>
+</html>
